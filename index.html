@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Character Build Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .exclude-section {
+            margin: 20px 0;
+            text-align: left;
+            display: inline-block;
+        }
+        .exclude-section h3 {
+            margin-bottom: 10px;
+        }
+        .exclude-section label {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Character Build Generator</h1>
+
+    <div class="exclude-section">
+        <h3>Races</h3>
+        <label><input type="checkbox" value="Altmer" checked> Altmer</label>
+        <label><input type="checkbox" value="Argonian" checked> Argonian</label>
+        <label><input type="checkbox" value="Bosmer" checked> Bosmer</label>
+        <label><input type="checkbox" value="Breton" checked> Breton</label>
+        <label><input type="checkbox" value="Dunmer" checked> Dunmer</label>
+        <label><input type="checkbox" value="Imperial" checked> Imperial</label>
+        <label><input type="checkbox" value="Khajiit" checked> Khajiit</label>
+        <label><input type="checkbox" value="Nord" checked> Nord</label>
+        <label><input type="checkbox" value="Orc" checked> Orc</label>
+        <label><input type="checkbox" value="Redguard" checked> Redguard</label>
+    </div>
+
+    <div class="exclude-section">
+        <h3>Blessings</h3>
+        <label><input type="checkbox" value="Akatosh" checked> Akatosh</label>
+        <label><input type="checkbox" value="Arkay" checked> Arkay</label>
+        <label><input type="checkbox" value="Auriel" checked> Auriel</label>
+        <label><input type="checkbox" value="Azura" checked> Azura</label>
+        <label><input type="checkbox" value="Boethia" checked> Boethia</label>
+        <label><input type="checkbox" value="Clavicus Vile" checked> Clavicus Vile</label>
+        <label><input type="checkbox" value="Dibella" checked> Dibella</label>
+        <label><input type="checkbox" value="Hermaeus Mora" checked> Hermaeus Mora</label>
+        <label><input type="checkbox" value="Hircine" checked> Hircine</label>
+        <label><input type="checkbox" value="Julianos" checked> Julianos</label>
+        <label><input type="checkbox" value="Jyggalag" checked> Jyggalag</label>
+        <label><input type="checkbox" value="Kynareth" checked> Kynareth</label>
+        <label><input type="checkbox" value="Magnus" checked> Magnus</label>
+        <label><input type="checkbox" value="Malacath" checked> Malacath</label>
+        <label><input type="checkbox" value="Mara" checked> Mara</label>
+        <label><input type="checkbox" value="Mehrunes Dagon" checked> Mehrunes Dagon</label>
+        <label><input type="checkbox" value="Mephala" checked> Mephala</label>
+        <label><input type="checkbox" value="Meridia" checked> Meridia</label>
+        <label><input type="checkbox" value="Molag Bal" checked> Molag Bal</label>
+        <label><input type="checkbox" value="Namira" checked> Namira</label>
+        <label><input type="checkbox" value="Nocturnal" checked> Nocturnal</label>
+        <label><input type="checkbox" value="Peryite" checked> Peryite</label>
+        <label><input type="checkbox" value="Sanguine" checked> Sanguine</label>
+        <label><input type="checkbox" value="Sheogorath" checked> Sheogorath</label>
+        <label><input type="checkbox" value="Stendarr" checked> Stendarr</label>
+        <label><input type="checkbox" value="Syrabane" checked> Syrabane</label>
+        <label><input type="checkbox" value="Talos" checked> Talos</label>
+        <label><input type="checkbox" value="Vermina" checked> Vermina</label>
+        <label><input type="checkbox" value="Zenithar" checked> Zenithar</label>
+    </div>
+
+    <div class="exclude-section">
+        <h3>Birthsigns </h3>
+        <label><input type="checkbox" value="Apprentice" checked> Apprentice</label>
+        <label><input type="checkbox" value="Atronach" checked> Atronach</label>
+        <label><input type="checkbox" value="Lady" checked> Lady</label>
+        <label><input type="checkbox" value="Lord" checked> Lord</label>
+        <label><input type="checkbox" value="Lover" checked> Lover</label>
+        <label><input type="checkbox" value="Mage" checked> Mage</label>
+        <label><input type="checkbox" value="Ritual" checked> Ritual</label>
+        <label><input type="checkbox" value="Serpent" checked> Serpent</label>
+        <label><input type="checkbox" value="Shadow" checked> Shadow</label>
+        <label><input type="checkbox" value="Steed" checked> Steed</label>
+        <label><input type="checkbox" value="Thief" checked> Thief</label>
+        <label><input type="checkbox" value="Tower" checked> Tower</label>
+        <label><input type="checkbox" value="Warrior" checked> Warrior</label>
+    </div>
+
+    <button id="generateBtn">Generate Character Build</button>
+    <div id="result"></div>
+
+    <script>
+        const races = ["Altmer", "Argonian", "Bosmer", "Breton", "Dunmer", "Imperial", "Khajiit", "Nord", "Orc", "Redguard"];
+        const blessings = ["Akatosh", "Arkay", "Auriel", "Azura", "Boethia", "Clavicus Vile", "Dibella", "Hermaeus Mora", "Hircine", "Julianos", "Jyggalag", "Kynareth", "Magnus", "Malacath", "Mara", "Mehrunes Dagon", "Mephala", "Meridia", "Molag Bal", "Namira", "Nocturnal", "Peryite", "Sanguine", "Sheogorath", "Stendarr", "Syrabane", "Talos", "Vermina", "Zenithar"];
+        const birthsigns = ["Apprentice", "Atronach", "Lady", "Lord", "Lover", "Mage", "Ritual", "Serpent", "Shadow", "Steed", "Thief", "Tower", "Warrior"];
+
+        function randlist(x) {
+            return x[Math.floor(Math.random() * x.length)];
+        }
+
+        function filterSelections(array, exclusions) {
+            return array.filter(item => exclusions.includes(item));
+        }
+
+        function getCheckedValues(section) {
+            return Array.from(section.querySelectorAll('input:checked')).map(checkbox => checkbox.value);
+        }
+
+        function build_char(races, blessings, birthsigns, bRace = true, bGender = true, bPreset = true, bBlessing = true, bBirthsign = true) {
+            let result = "";
+            if (bRace) {
+                const race = randlist(races);
+                result += "Race: " + race + "<br>";
+            }
+
+            if (bGender) {
+                const gender = Math.floor(Math.random() * 2) + 1;
+                result += "Gender: " + (gender === 1 ? "Male" : "Female") + "<br>";
+            }
+
+            if (bPreset) {
+                const preset = Math.floor(Math.random() * 10) + 1;
+                result += "Preset: " + preset + "<br>";
+            }
+
+            if (bBirthsign) {
+                const birthsign = randlist(birthsigns);
+                result += "Birthsign: " + birthsign + "<br>";
+            }
+
+            if (bBlessing) {
+                const blessing = randlist(blessings);
+                result += "Blessing: " + blessing + "<br>";
+            }
+
+            return result;
+        }
+
+        document.getElementById('generateBtn').addEventListener('click', function () {
+            const excludeRaces = getCheckedValues(document.querySelector('.exclude-section:nth-child(2)'));
+            const excludeBlessings = getCheckedValues(document.querySelector('.exclude-section:nth-child(3)'));
+            const excludeBirthsigns = getCheckedValues(document.querySelector('.exclude-section:nth-child(4)'));
+
+            const filteredRaces = filterSelections(races, excludeRaces);
+            const filteredBlessings = filterSelections(blessings, excludeBlessings);
+            const filteredBirthsigns = filterSelections(birthsigns, excludeBirthsigns);
+
+            const result = build_char(filteredRaces, filteredBlessings, filteredBirthsigns);
+            document.getElementById('result').innerHTML = result;
+        });
+    </script>
+</body>
+</html>
