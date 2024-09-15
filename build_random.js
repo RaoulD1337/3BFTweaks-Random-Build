@@ -8,7 +8,8 @@ const races = {
     Khajiit: { birthsign: ["Ritual"], blessing: ["Clavicus Vile", "Kynareth"] },
     Nord: { birthsign: [], blessing: ["Kynareth", "Sanguine"] },
     Orc: { birthsign: ["Ritual", "Shadow"], blessing: ["Akatosh", "Boethia", "Clavicus Vile", "Hermaeus Mora", "Kynareth", "Magnus", "Mephala"] },
-    Redguard: { birthsign: ["Ritual"], blessing: ["Akatosh", "Clavicus Vile", "Hermaeus Mora", "Kynareth", "Magnus", "Sanguine"] }
+    Redguard: { birthsign: ["Ritual"], blessing: ["Akatosh", "Clavicus Vile", "Hermaeus Mora", "Kynareth", "Magnus", "Sanguine"] },
+	None: { birthsign: ["Apprentice", "Atronach", "Lady", "Lord", "Lover", "Mage", "Ritual", "Serpent", "Shadow", "Steed", "Thief", "Tower", "Warrior"], blessing: ["Akatosh", "Arkay", "Auriel", "Azura", "Boethia", "Clavicus Vile", "Dibella", "Hermaeus Mora", "Hircine", "Julianos", "Jyggalag", "Kynareth", "Magnus", "Malacath", "Mara", "Mehrunes Dagon", "Mephala", "Meridia", "Molag Bal", "Namira", "Nocturnal", "Peryite", "Sanguine", "Sheogorath", "Stendarr", "Syrabane", "Talos", "Vaermina", "Zenithar"] }
 };
 
 const birthsigns = {
@@ -24,7 +25,8 @@ const birthsigns = {
     Steed: { race: [], blessing: [] },
     Thief: { race: ["Altmer", "Breton"], blessing: ["Julianos", "Magnus", "Sanguine"] },
     Tower: { race: ["Altmer", "Bosmer"], blessing: ["Boethia", "Hircine", "Julianos", "Kynareth", "Magnus", "Namira", "Nocturnal"] },
-    Warrior: { race: [], blessing: ["Magnus", "Mephala", "Vaermina"] }
+    Warrior: { race: [], blessing: ["Magnus", "Mephala", "Vaermina"] },
+	None: { race: ["Altmer", "Argonian", "Bosmer", "Breton", "Dunmer", "Imperial", "Khajiit", "Nord", "Orc", "Redguard"], blessing: ["Akatosh", "Arkay", "Auriel", "Azura", "Boethia", "Clavicus Vile", "Dibella", "Hermaeus Mora", "Hircine", "Julianos", "Jyggalag", "Kynareth", "Magnus", "Malacath", "Mara", "Mehrunes Dagon", "Mephala", "Meridia", "Molag Bal", "Namira", "Nocturnal", "Peryite", "Sanguine", "Sheogorath", "Stendarr", "Syrabane", "Talos", "Vaermina", "Zenithar"]}
 };
 
 const blessings = {
@@ -56,7 +58,8 @@ const blessings = {
     Syrabane: { race: [], birthsign: [] },
     Talos: { race: ["Bosmer"], birthsign: ["Atronach", "Shadow", "Tower"] },
     Vaermina: { race: ["Bosmer"], birthsign: ["Apprentice", "Atronach", "Mage", "Shadow", "Warrior"] },
-    Zenithar: { race: ["Bosmer"], birthsign: ["Shadow"] }
+    Zenithar: { race: ["Bosmer"], birthsign: ["Shadow"] },
+	None: { race: ["Altmer", "Argonian", "Bosmer", "Breton", "Dunmer", "Imperial", "Khajiit", "Nord", "Orc", "Redguard"], birthsign: ["Apprentice", "Atronach", "Lady", "Lord", "Lover", "Mage", "Ritual", "Serpent", "Shadow", "Steed", "Thief", "Tower", "Warrior"]}
 };
 
 function getCheckedValues(className) {
@@ -66,13 +69,15 @@ function getCheckedValues(className) {
 
 function build_char(blacklistRaces, blacklistBlessings, blacklistBirthsigns, bGender, bPreset) {
 	let result = "";
+	let race = "None";
+	let birthsign = "None";
+	let blessing = "None";
 
-	const availableRaces = Object.keys(races).filter(race => !blacklistRaces.includes(race));
-	race = availableRaces[Math.floor(Math.random() * availableRaces.length)];
-	
-	if(typeof(race) === 'undefined') {
-		race = "None";
+	const availableRaces = Object.keys(races).filter(r => !blacklistRaces.includes(r) && r !== "None");
+	if(availableRaces.length > 0) {
+		race = availableRaces[Math.floor(Math.random() * availableRaces.length)];
 	}
+
 	result += "Race: " + race + "<br>";
 	
 	if (bGender) {
@@ -85,19 +90,18 @@ function build_char(blacklistRaces, blacklistBlessings, blacklistBirthsigns, bGe
 		result += "Preset: " + preset + "<br>";
 	}
 
-	const availableBirthsigns = Object.keys(birthsigns).filter(bs => !races[race].birthsign.includes(bs) && !blacklistBirthsigns.includes(bs));
-	birthsign = availableBirthsigns[Math.floor(Math.random() * availableBirthsigns.length)];
-	if(typeof(birthsign) === 'undefined') {
-		birthsign = "None";
+	const availableBirthsigns = Object.keys(birthsigns).filter(bs => !races[race].birthsign.includes(bs) && !blacklistBirthsigns.includes(bs) && bs !== "None");
+	if(availableBirthsigns.length > 0) {
+		birthsign = availableBirthsigns[Math.floor(Math.random() * availableBirthsigns.length)];
 	}
 	
-	result += "birthsign: " + birthsign + "<br>";
+	result += "Birthsign: " + birthsign + "<br>";
 
-	const availableBlessings = Object.keys(blessings).filter(blessing => !races[race].blessing.includes(blessing) && !birthsigns[birthsign].blessing.includes(blessing) && !blacklistBlessings.includes(blessing));
-	const blessing = availableBlessings[Math.floor(Math.random() * availableBlessings.length)];
-	if(typeof(blessing) === 'undefined') {
-		blessing = "None";
+	const availableBlessings = Object.keys(blessings).filter(b => !races[race].blessing.includes(b) && !birthsigns[birthsign].blessing.includes(b) && !blacklistBlessings.includes(b) && b !== "None");
+	if(availableBlessings.length > 0) {
+		blessing = availableBlessings[Math.floor(Math.random() * availableBlessings.length)];
 	}
+
 	result += "Blessing: " + blessing + "<br>";
 
 	return result;
