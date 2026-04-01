@@ -54,6 +54,7 @@ const blessings = {
     Peryite: { race: [], birthsign: ["Shadow"] },
     Sanguine: { race: ["Altmer", "Bosmer", "Breton", "Dunmer", "Imperial", "Nord", "Redguard"], birthsign: ["Shadow"] },
     Sheogorath: { race: ["Bosmer"], birthsign: [] },
+	Sithis: { race: [], birthsign: [] },
     Stendarr: { race: ["Bosmer"], birthsign: ["Ritual"] },
     Syrabane: { race: [], birthsign: [] },
     Talos: { race: ["Bosmer"], birthsign: ["Atronach", "Shadow", "Tower"] },
